@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
+  const [text, setText] = useState("");
+  const [foods] = useState([
+    "thin mints",
+    "watermelon",
+    "sushi",
+    "blueberries",
+    "mint chocolate chip ice cream",
+  ]);
+
+  let filteredFoods = foods.filter((food) => food.includes(text));
+  let foodsToDisplay = filteredFoods.map((foodName, foodKey) => {
+    return <h2 key={foodKey}>{foodName}</h2>;
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input
+        type="text"
+        value={text}
+        onChange={({ target }) => setText(target.value)}
+      />
+      <div>{foodsToDisplay}</div>
     </div>
   );
-}
+};
 
 export default App;
